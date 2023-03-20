@@ -37,7 +37,7 @@ public class BinarySearchTree<K, V> {
 	Adds the specified value to the tree
 	@param value the value to be added
 	*/
-	public void add(V value, V value2) {
+	public void add(V value) {
 		TreeNode<K, V> newNode = new TreeNode<K, V>(((Association<K, V>) value).getKey(), value);
 		if (isEmpty) { //Es el primer elemento que se inserta
 			root = newNode;
@@ -85,7 +85,7 @@ public class BinarySearchTree<K, V> {
 	@param id the key to be inserted
 	@param value the value to be inserted
 	*/
-	public void insert(K id, V value, V value2) {
+	public void insert(K id, V value) {
 	
 		TreeNode<K, V> newNode = new TreeNode<K, V>(id, value);
 		if (isEmpty()) {
