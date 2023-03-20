@@ -24,9 +24,9 @@ public class Diccionario {
      * Con la lista de las líneas del archivo categoriza la información y la guarda en el BST
      * @param lineas
      */
-    public void abrirArchivoPalabras(ArrayList<String> lineas){
+    public void abrirArchivoPalabras(ArrayList<String> lineasPalabras){
 
-        for (String linea : lineas) {
+        for (String linea : lineasPalabras) {
 
             String [] traduccionesIngles = new String[2];
             String [] traduccionesEspaniol = new String[2];
@@ -55,6 +55,11 @@ public class Diccionario {
         }
     }
 
+    /**
+     * Dependiendo del diccionario que el usuario quiera abrir muestra las palabras en orden. 
+     * @param idioma
+     * @return
+     */
     public String mostrarPalabrasInOrder(int idioma){
 
         String resultado = "";
@@ -111,6 +116,46 @@ public class Diccionario {
                 break;
         }
         return resultado;
+    }
+ 
+    /**
+     * Basándose en la primera línea del archivo de texto, busca coincidencias en los árboles para determinar el idioma del archivo.
+     * @param lineasOraciones
+     * @return
+     */
+    public int detectarIdioma(ArrayList<String> lineasOraciones){
+        int idioma = 0;
+
+        int contadorIngles = 0;
+        int contadorEspaniol = 0;
+        int contadorFrances = 0;
+
+        String lineaInicial = lineasOraciones.get(0);
+        String[] palabras = lineaInicial.split(" ");
+        
+        for (String palabra : palabras) {
+            if(ingles.search(palabra) != null){
+                contadorIngles++;
+            }
+            else if(espaniol.search(palabra) != null){
+                contadorEspaniol++;
+            }
+            else if(frances.search(palabra) != null){
+                contadorFrances++;
+            }
+        }
+        
+        if(contadorIngles >= contadorEspaniol && contadorIngles >= contadorFrances){
+            idioma =1;
+        }
+        else if(contadorEspaniol >= contadorIngles && contadorEspaniol >= contadorFrances){
+            idioma =1;
+        }
+        else if(contadorFrances >= contadorEspaniol && contadorFrances >= contadorIngles){
+            idioma =1;
+        }
+
+        return idioma;
     }
     
 }
