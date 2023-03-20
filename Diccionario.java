@@ -55,9 +55,61 @@ public class Diccionario {
         }
     }
 
-    public String mostrarPalabrasInOrder(){
+    public String mostrarPalabrasInOrder(int idioma){
+
         String resultado = "";
+        VisitadorDeNodos visitador = new VisitadorDeNodos<String, Association>();        
+
+        switch (idioma) {
+            case 1: //inglés
+                resultado = resultado + "\n\nDICCIONARIO DE INGLÉS" + "\n-----------------------";
+
+                ingles.InOrderTraversal(visitador);
+                
+                for (int i = 0; i < visitador.getMiListado().size(); i++) {
+
+                    Association asociacionActual = (Association) visitador.getMiListado().get(i);
+                    String[] traducciones = (String[]) asociacionActual.getValue();
+                    resultado = resultado + "\n\n" + asociacionActual.getKey() + ": " + "\nEspañol: " + traducciones[0] + "\nFrancés: " + traducciones [1]; 
+                } 
+
+                break;
+
+            case 2: //español
+
+                resultado = resultado + "\n\nDICCIONARIO DE ESPAÑOL" + "\n-----------------------";
+
+                espaniol.InOrderTraversal(visitador);
+                
+                for (int i = 0; i < visitador.getMiListado().size(); i++) {
+
+                    Association asociacionActual = (Association) visitador.getMiListado().get(i);
+                    String[] traducciones = (String[]) asociacionActual.getValue();
+                    resultado = resultado + "\n\n" + asociacionActual.getKey() + ": " + "\nInglés: " + traducciones[0] + "\nFrancés: " + traducciones [1]; 
+                } 
+
+                break;
+
+            case 3: //francés
+                
+                resultado = resultado + "\n\nDICCIONARIO DE FRANCÉS" + "\n-----------------------";
+
+                frances.InOrderTraversal(visitador);
+                
+                for (int i = 0; i < visitador.getMiListado().size(); i++) {
+
+                    Association asociacionActual = (Association) visitador.getMiListado().get(i);
+                    String[] traducciones = (String[]) asociacionActual.getValue();
+                    resultado = resultado + "\n\n" + asociacionActual.getKey() + ": " + "\nInglés: " + traducciones[0] + "\nEspañol: " + traducciones [1]; 
+                } 
+
+                break;
         
+            
+            default:
+                resultado = resultado +"\nOpción incorrecta.";
+                break;
+        }
         return resultado;
     }
     
