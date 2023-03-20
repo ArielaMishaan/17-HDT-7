@@ -1,7 +1,11 @@
 import java.util.Comparator;
 
-/**
- * 
+/*
+ * Ariela Mishaan (22052)
+ * Algoritmos y Estructuras de Datos Sección 40
+ * Hoja de Trabajo 7
+ * 20-03-2023
+ * Clase Binary Search Tree: modela un árbol binario de búsqueda. Tomada del repositorio de la clase. 
  */
 
 /**
@@ -12,7 +16,6 @@ public class BinarySearchTree<K, V> {
 
 	private TreeNode<K, V> root;
 	private Comparator<K> keyComparator;
-	private IGetKey<K, V> keyGenerator;
 	private boolean isEmpty;
 	private int count;
 	
@@ -22,10 +25,9 @@ public class BinarySearchTree<K, V> {
 	@param _keyComparator the comparator to use for comparing keys
 	@param _keyGenerator the key generator to use for generating keys from values
 	*/
-	public BinarySearchTree(Comparator<K> _keyComparator, IGetKey<K, V> _keyGenerator) {
+	public BinarySearchTree(Comparator<K> _keyComparator) {
 		root = null;
 		keyComparator = _keyComparator;
-		keyGenerator = _keyGenerator;
 		isEmpty = true;
 		count = 0;
 	}
@@ -35,8 +37,8 @@ public class BinarySearchTree<K, V> {
 	Adds the specified value to the tree
 	@param value the value to be added
 	*/
-	public void add(V value) {
-		TreeNode<K, V> newNode = new TreeNode<K, V>((K)keyGenerator.getKeyFromValue(value), value);
+	public void add(V value, V value2) {
+		TreeNode<K, V> newNode = new TreeNode<K, V>(((Association<K, V>) value).getKey(), value);
 		if (isEmpty) { //Es el primer elemento que se inserta
 			root = newNode;
 			isEmpty = false;
@@ -83,7 +85,7 @@ public class BinarySearchTree<K, V> {
 	@param id the key to be inserted
 	@param value the value to be inserted
 	*/
-	public void insert(K id, V value) {
+	public void insert(K id, V value, V value2) {
 	
 		TreeNode<K, V> newNode = new TreeNode<K, V>(id, value);
 		if (isEmpty()) {
