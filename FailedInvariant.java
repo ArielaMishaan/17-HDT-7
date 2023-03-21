@@ -1,3 +1,11 @@
+/*
+ * Ariela Mishaan (22052)
+ * Algoritmos y Estructuras de Datos Sección 40
+ * Hoja de Trabajo 7
+ * 20-03-2023
+ * Clase FailedInvariant: tomada de la base de datos del libro Java Structures (Duane A. Bailey)
+ */
+
 /**
  * A class of error indicating failure.
  *

@@ -1,3 +1,11 @@
+/*
+ * Ariela Mishaan (22052)
+ * Algoritmos y Estructuras de Datos Sección 40
+ * Hoja de Trabajo 7
+ * 20-03-2023
+ * Clase Association: tomada de la base de datos del libro Java Structures (Duane A. Bailey)
+ */
+
 // A class for binding key/value pairs.
 // (c) 1998,2001 duane a. bailey
 import java.util.Map;

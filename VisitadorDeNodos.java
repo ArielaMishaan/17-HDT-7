@@ -1,3 +1,11 @@
+/*
+ * Ariela Mishaan (22052)
+ * Algoritmos y Estructuras de Datos Sección 40
+ * Hoja de Trabajo 7
+ * 20-03-2023
+ * Clase Visitador de nodos: implementa la interfaz ITraversal, visita los nodos del BST. Idea tomada del repositorio de la clase. 
+ */
+
 import java.util.ArrayList;
 
 public class VisitadorDeNodos<K, V> implements ITraversal<K,V> {

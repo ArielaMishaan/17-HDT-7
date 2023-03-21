@@ -1,3 +1,11 @@
+/*
+ * Ariela Mishaan (22052)
+ * Algoritmos y Estructuras de Datos Sección 40
+ * Hoja de Trabajo 7
+ * 20-03-2023
+ * Clase Diccionario: clase controladora para realizar todas las acciones que se piden en la tarea.
+ */
+
 import java.util.ArrayList;
 
 public class Diccionario {
@@ -7,13 +15,19 @@ public class Diccionario {
     private BinarySearchTree<String, Association> frances;
     private ComparadorPalabras comparadorPalabras;
 
-
+    
     public Diccionario() {
         this.ingles = new BinarySearchTree<String, Association>(comparadorPalabras);
         this.espaniol = new BinarySearchTree<String, Association>(comparadorPalabras);
         this.frances = new BinarySearchTree<String, Association>(comparadorPalabras);
     }
 
+    /**
+     * Constructor con parámetros
+     * @param ingles
+     * @param espaniol
+     * @param frances
+     */
     public Diccionario(BinarySearchTree<String,Association> ingles, BinarySearchTree<String,Association> espaniol, BinarySearchTree<String,Association> frances) {
         this.ingles = ingles;
         this.espaniol = espaniol;
@@ -58,7 +72,7 @@ public class Diccionario {
     /**
      * Dependiendo del diccionario que el usuario quiera abrir muestra las palabras en orden. 
      * @param idioma
-     * @return
+     * @return la lista de palabras en orden
      */
     public String mostrarPalabrasInOrder(int idioma){
 
@@ -121,7 +135,7 @@ public class Diccionario {
     /**
      * Basándose en la primera línea del archivo de texto, busca coincidencias en los árboles para determinar el idioma del archivo.
      * @param lineasOraciones
-     * @return
+     * @return el idioma (1 = inglés, 2 = español, 3 = francés)
      */
     public int detectarIdioma(ArrayList<String> lineasOraciones){
         int idioma = 0;
@@ -158,11 +172,19 @@ public class Diccionario {
         return idioma;
     }
 
+    /**
+     * En base al idioma de entrada y el idioma de salida, se traduce todo el archivo de texto.
+     * @param lineasOraciones
+     * @param idiomaOrigen
+     * @param idiomaDestino
+     * @return el documento traducido
+     */
     public String traducirDocumento(ArrayList<String> lineasOraciones, int idiomaOrigen, int idiomaDestino){
         String resultado = "";
 
         //por cada línea en mi archivo
         for (String linea : lineasOraciones) {
+            resultado = resultado + "\n";
 
             //separo la línea en palabras
             String[] palabras = linea.split(" ");
@@ -252,6 +274,12 @@ public class Diccionario {
                                 break;
 
                             case 2: //español
+                                if (frances.contains(palabra)){
+                                    resultado = resultado + " " + traduccionesFrances[1];    
+                                }
+                                else{
+                                    resultado = resultado + " *" + palabra + "*";
+                                }
                                 break;
                         
                             default:

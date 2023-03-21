@@ -32,11 +32,11 @@ public class BinarySearchTree<K, V> {
 		count = 0;
 	}
 	
+	
 	/**
-
-	Adds the specified value to the tree
-	@param value the value to be added
-	*/
+	 * 	Adds the specified value to the tree
+	 * @param value
+	 */
 	public void add(V value) {
 		TreeNode<K, V> newNode = new TreeNode<K, V>(((Association<K, V>) value).getKey(), value);
 		if (isEmpty) { //Es el primer elemento que se inserta
@@ -49,11 +49,10 @@ public class BinarySearchTree<K, V> {
 	}
 	
 	/**
-
-	Recursively inserts a new node into the tree
-	@param actualNode the node currently being compared
-	@param newNode the node to be inserted
-	*/
+	 * Recursively inserts a new node into the tree
+	 * @param actualNode the node currently being compared
+	 * @param newNode the node to be inserted
+	 */
 	private void internalInsert(TreeNode<K, V> actualNode, TreeNode<K, V> newNode) {
 		int result = keyComparator.compare(actualNode.getKey(), newNode.getKey());
 		//si actual es mayor entonces da un nuemero posito
@@ -80,11 +79,10 @@ public class BinarySearchTree<K, V> {
 	}
 	
 	/**
-
-	Inserts a node with the specified key and value into the tree
-	@param id the key to be inserted
-	@param value the value to be inserted
-	*/
+	 * Inserts a node with the specified key and value into the tree
+	 * @param id the key to be inserted
+	 * @param value the value to be inserted
+	 */
 	public void insert(K id, V value) {
 	
 		TreeNode<K, V> newNode = new TreeNode<K, V>(id, value);
@@ -98,20 +96,18 @@ public class BinarySearchTree<K, V> {
 	}
 	
 	/**
-
-	Returns true if the tree is empty, false otherwise
-	@return true if the tree is empty, false otherwise
-	*/
+	 * Returns true if the tree is empty, false otherwise
+	 * @return true if the tree is empty, false otherwise
+	 */
 	public boolean isEmpty() {
 		return isEmpty;
 	}
 	
 	/**
-
-	Searches the tree for the node with the specified key and returns its value
-	@param key the key to search for
-	@return the value of the node with the specified key, or null if no such node exists
-	*/
+	 * Searches the tree for the node with the specified key and returns its value
+	 * @param key the key to search for
+	 * @return the value of the node with the specified key, or null if no such node exists
+	 */
 	public V search(K key) {
 		return (V) internalSearch(root, key);
 	}
@@ -134,12 +130,11 @@ public class BinarySearchTree<K, V> {
 	}
 	
 	/**
-
-	Recursively searches the tree for the node with the specified key and returns its value
-	@param actual the node currently being compared
-	@param key the key to search for
-	@return the value serch
-	*/
+	 * Recursively searches the tree for the node with the specified key and returns its value
+	 * @param actual the node currently being compared
+	 * @param key the key to search for
+	 * @return the value serch
+	 */
 	private V internalSearch(TreeNode<K, V> actual, K key) {
 		
 		if (actual != null) {
@@ -163,10 +158,19 @@ public class BinarySearchTree<K, V> {
 		
 	}
 	
+	/**
+	 * Visita el BST In order
+	 * @param visitador
+	 */
 	public void InOrderTraversal(ITraversal<K, V> visitador) {
 		internalInOrder(root, visitador);
 	}
 	
+	/**
+	 * 
+	 * @param actual
+	 * @param visitador
+	 */
 	private void internalInOrder(TreeNode<K, V> actual, ITraversal<K, V> visitador) {
 		
 		if (actual != null) {
@@ -185,11 +189,19 @@ public class BinarySearchTree<K, V> {
 		
 	}
 	
-	
+	/**
+	 * Visita el BST post order
+	 * @param visitador
+	 */
 	public void PostOrderTraversal(ITraversal<K, V> visitador) {
 		internalPostOrder(root, visitador);
 	}
 	
+	/**
+	 * 
+	 * @param actual
+	 * @param visitador
+	 */
 	private void internalPostOrder(TreeNode<K, V> actual, ITraversal<K, V> visitador) {
 		
 		if (actual != null) {
@@ -208,11 +220,19 @@ public class BinarySearchTree<K, V> {
 		
 	}
 	
-	
+	/**
+	 * Visita el BST en pre order
+	 * @param visitador
+	 */
 	public void PreOrderTraversal(ITraversal<K, V> visitador) {
 		internalPreOrder(root, visitador);
 	}
 	
+	/**
+	 * 
+	 * @param actual
+	 * @param visitador
+	 */
 	private void internalPreOrder(TreeNode<K, V> actual, ITraversal<K, V> visitador) {
 		
 		if (actual != null) {
@@ -231,6 +251,11 @@ public class BinarySearchTree<K, V> {
 		
 	}
 	
+	/**
+	 * Elimina un nodo según la llave
+	 * @param id
+	 * @return
+	 */
 	public V delete(K id) {
 		if (!isEmpty()) {
 			int result = keyComparator.compare(root.getKey(), id);
@@ -344,6 +369,13 @@ public class BinarySearchTree<K, V> {
 		return null;
 	}
 	
+	/**
+	 * elimina un nodo
+	 * @param actual
+	 * @param id
+	 * @param isLeft
+	 * @return
+	 */
 	private V internalDelete(TreeNode<K, V> actual, K id, boolean isLeft) {
 		if (actual != null) {
 			int result = keyComparator.compare(actual.getKey(), id);
