@@ -115,6 +115,23 @@ public class BinarySearchTree<K, V> {
 	public V search(K key) {
 		return (V) internalSearch(root, key);
 	}
+
+	/**
+	 * Busca el valor con la llave; si lo encuentra es true si no false.
+	 * @param key
+	 * @return
+	 */
+	public boolean contains(K key){
+		boolean resultado = false;
+
+		if(internalSearch(root, key) == null){
+			resultado = false;
+		}
+		else{
+			resultado = true;
+		}
+		return resultado;
+	}
 	
 	/**
 

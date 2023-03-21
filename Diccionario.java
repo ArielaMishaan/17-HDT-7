@@ -45,9 +45,9 @@ public class Diccionario {
             traduccionesFrances[0] = palabraIngles;
             traduccionesFrances[1] = palabraEspaniol; 
 
-            Association entradaIngles = new Association(palabraIngles, traduccionesIngles);
-            Association entradaEspaniol = new Association(palabraEspaniol, traduccionesEspaniol);
-            Association entradaFrances = new Association(palabraFrances, traduccionesFrances);
+            Association entradaIngles = new Association(palabraIngles.toLowerCase(), traduccionesIngles);
+            Association entradaEspaniol = new Association(palabraEspaniol.toLowerCase(), traduccionesEspaniol);
+            Association entradaFrances = new Association(palabraFrances.toLowerCase(), traduccionesFrances);
 
             ingles.insert(palabraIngles, entradaIngles);
             espaniol.insert(palabraEspaniol, entradaEspaniol);
@@ -156,6 +156,116 @@ public class Diccionario {
         }
 
         return idioma;
+    }
+
+    public String traducirDocumento(ArrayList<String> lineasOraciones, int idiomaOrigen, int idiomaDestino){
+        String resultado = "";
+
+        //por cada línea en mi archivo
+        for (String linea : lineasOraciones) {
+
+            //separo la línea en palabras
+            String[] palabras = linea.split(" ");
+
+            //a cada palabra voy a buscarle la traducción
+            for (String palabra : palabras) {
+
+                //depende del idioma de origen en qué BST busco la llave
+                switch (idiomaOrigen) {
+
+                    case 1: //inglés
+
+                        Association entradaIngles = ingles.search(palabra.toLowerCase());
+                        String [] traduccionesIngles = (String[]) entradaIngles.getValue();
+                    
+                        switch (idiomaDestino) {
+
+                            case 2: //español
+                                if (ingles.contains(palabra)){
+                                    resultado = resultado + " " + traduccionesIngles[0];    
+                                }
+                                else{
+                                    resultado = resultado + " *" + palabra + "*";
+                                }
+                                
+                                break;
+
+                            case 3: //francés
+                                if (ingles.contains(palabra)){
+                                    resultado = resultado + " " + traduccionesIngles[1];    
+                                }
+                                else{
+                                    resultado = resultado + " *" + palabra + "*";
+                                }
+                                break;
+                        
+                            default:
+                                break;
+                        }
+
+                        break;
+
+                    case 2: //español
+
+                        Association entradaEspaniol = espaniol.search(palabra.toLowerCase());
+                        String[] traduccionesEspaniol = (String[]) entradaEspaniol.getValue();
+
+                        switch (idiomaDestino) {
+
+                            case 1: //inglés
+                                if (espaniol.contains(palabra)){
+                                    resultado = resultado + " " + traduccionesEspaniol[0];    
+                                }
+                                else{
+                                    resultado = resultado + " *" + palabra + "*";
+                                }
+                                break;
+
+                            case 3: //francés
+                                if (espaniol.contains(palabra)){
+                                    resultado = resultado + " " + traduccionesEspaniol[1];    
+                                }
+                                else{
+                                    resultado = resultado + " *" + palabra + "*";
+                                }
+                                break;
+                        
+                            default:
+                                break;
+                        }
+                        
+                        break;
+
+                    case 3: //francés
+
+                        Association entradaFrances = frances.search(palabra.toLowerCase());
+                        String[] traduccionesFrances = (String[]) entradaFrances.getValue();
+
+                        switch (idiomaDestino) {
+                            case 1: //inglés
+                                if (frances.contains(palabra)){
+                                    resultado = resultado + " " + traduccionesFrances[0];    
+                                }
+                                else{
+                                    resultado = resultado + " *" + palabra + "*";
+                                }
+                                break;
+
+                            case 2: //español
+                                break;
+                        
+                            default:
+                                break;
+                        }
+                        break;
+                
+                    default:
+                        break;
+                }
+            }
+        }
+
+        return resultado;
     }
     
 }
