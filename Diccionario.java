@@ -8,6 +8,8 @@
 
 import java.util.ArrayList;
 
+import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.LowerCase;
+
 public class Diccionario {
 
     private BinarySearchTree<String, Association> ingles;
@@ -17,6 +19,7 @@ public class Diccionario {
 
     
     public Diccionario() {
+        this.comparadorPalabras = new ComparadorPalabras();
         this.ingles = new BinarySearchTree<String, Association>(comparadorPalabras);
         this.espaniol = new BinarySearchTree<String, Association>(comparadorPalabras);
         this.frances = new BinarySearchTree<String, Association>(comparadorPalabras);
@@ -29,6 +32,7 @@ public class Diccionario {
      * @param frances
      */
     public Diccionario(BinarySearchTree<String,Association> ingles, BinarySearchTree<String,Association> espaniol, BinarySearchTree<String,Association> frances) {
+        this.comparadorPalabras = new ComparadorPalabras();
         this.ingles = ingles;
         this.espaniol = espaniol;
         this.frances = frances;
@@ -160,13 +164,13 @@ public class Diccionario {
         }
         
         if(contadorIngles >= contadorEspaniol && contadorIngles >= contadorFrances){
-            idioma =1;
+            idioma = 1;
         }
         else if(contadorEspaniol >= contadorIngles && contadorEspaniol >= contadorFrances){
-            idioma =1;
+            idioma = 2;
         }
         else if(contadorFrances >= contadorEspaniol && contadorFrances >= contadorIngles){
-            idioma =1;
+            idioma = 3;
         }
 
         return idioma;
@@ -189,6 +193,10 @@ public class Diccionario {
             //separo la línea en palabras
             String[] palabras = linea.split(" ");
 
+            for (int i = 0; i < palabras.length; i++) {
+                palabras[i] = palabras[i].toLowerCase();
+            }
+
             //a cada palabra voy a buscarle la traducción
             for (String palabra : palabras) {
 
@@ -198,12 +206,12 @@ public class Diccionario {
                     case 1: //inglés
 
                         Association entradaIngles = ingles.search(palabra.toLowerCase());
-                        String [] traduccionesIngles = (String[]) entradaIngles.getValue();
                     
                         switch (idiomaDestino) {
 
                             case 2: //español
                                 if (ingles.contains(palabra)){
+                                    String [] traduccionesIngles = (String[]) entradaIngles.getValue();
                                     resultado = resultado + " " + traduccionesIngles[0];    
                                 }
                                 else{
@@ -214,6 +222,7 @@ public class Diccionario {
 
                             case 3: //francés
                                 if (ingles.contains(palabra)){
+                                    String [] traduccionesIngles = (String[]) entradaIngles.getValue();
                                     resultado = resultado + " " + traduccionesIngles[1];    
                                 }
                                 else{
@@ -230,12 +239,12 @@ public class Diccionario {
                     case 2: //español
 
                         Association entradaEspaniol = espaniol.search(palabra.toLowerCase());
-                        String[] traduccionesEspaniol = (String[]) entradaEspaniol.getValue();
 
                         switch (idiomaDestino) {
 
                             case 1: //inglés
                                 if (espaniol.contains(palabra)){
+                                    String[] traduccionesEspaniol = (String[]) entradaEspaniol.getValue();
                                     resultado = resultado + " " + traduccionesEspaniol[0];    
                                 }
                                 else{
@@ -245,6 +254,7 @@ public class Diccionario {
 
                             case 3: //francés
                                 if (espaniol.contains(palabra)){
+                                    String[] traduccionesEspaniol = (String[]) entradaEspaniol.getValue();
                                     resultado = resultado + " " + traduccionesEspaniol[1];    
                                 }
                                 else{
@@ -261,11 +271,11 @@ public class Diccionario {
                     case 3: //francés
 
                         Association entradaFrances = frances.search(palabra.toLowerCase());
-                        String[] traduccionesFrances = (String[]) entradaFrances.getValue();
 
                         switch (idiomaDestino) {
                             case 1: //inglés
                                 if (frances.contains(palabra)){
+                                    String[] traduccionesFrances = (String[]) entradaFrances.getValue();
                                     resultado = resultado + " " + traduccionesFrances[0];    
                                 }
                                 else{
@@ -275,6 +285,7 @@ public class Diccionario {
 
                             case 2: //español
                                 if (frances.contains(palabra)){
+                                    String[] traduccionesFrances = (String[]) entradaFrances.getValue();
                                     resultado = resultado + " " + traduccionesFrances[1];    
                                 }
                                 else{
@@ -296,4 +307,69 @@ public class Diccionario {
         return resultado;
     }
     
+
+    
+    /** 
+     * @return BinarySearchTree<String, Association>
+     */
+    public BinarySearchTree<String,Association> getIngles() {
+        return this.ingles;
+    }
+
+    /**
+     * 
+     * @param ingles
+     */
+    public void setIngles(BinarySearchTree<String,Association> ingles) {
+        this.ingles = ingles;
+    }
+
+    /**
+     * 
+     * @return binary search tree español
+     */
+    public BinarySearchTree<String,Association> getEspaniol() {
+        return this.espaniol;
+    }
+
+    /**
+     * 
+     * @param espaniol
+     */
+    public void setEspaniol(BinarySearchTree<String,Association> espaniol) {
+        this.espaniol = espaniol;
+    }
+
+    /**
+     * 
+     * @return binary search tree frances
+     */
+    public BinarySearchTree<String,Association> getFrances() {
+        return this.frances;
+    }
+
+    /**
+     * 
+     * @param frances
+     */
+    public void setFrances(BinarySearchTree<String,Association> frances) {
+        this.frances = frances;
+    }
+
+    /**
+     * 
+     * @return el comparador de palabras
+     */
+    public ComparadorPalabras getComparadorPalabras() {
+        return this.comparadorPalabras;
+    }
+
+    /**
+     * 
+     * @param comparadorPalabras
+     */
+    public void setComparadorPalabras(ComparadorPalabras comparadorPalabras) {
+        this.comparadorPalabras = comparadorPalabras;
+    }
+
 }
