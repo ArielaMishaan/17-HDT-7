@@ -1,0 +1,6 @@
+dog,perro,chien
+woman,mujer,femme
+man,hombre,homme
+house,casa,loger
+pizza,pizza,pizza
+hello,hola,bonjour

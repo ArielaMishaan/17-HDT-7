@@ -8,8 +8,6 @@
 
 import java.util.ArrayList;
 
-import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.LowerCase;
-
 public class Diccionario {
 
     private BinarySearchTree<String, Association> ingles;
